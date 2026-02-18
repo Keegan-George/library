@@ -13,5 +13,28 @@ function addBookToLibrary(title, author, numPages) {
     myLibrary.push(book)
 }
 
+function displayBook() {
+    const bookContainer = document.querySelector(".book-container");
 
+    for (let book of myLibrary) {
+        let card = document.createElement("div");
+        let titleText = document.createElement("h3");
+        let authorText = document.createElement("p");
+        let numPagesText = document.createElement("p");
+        let readText = document.createElement("p");
 
+        card.classList.add("card");
+
+        titleText.textContent = book.title;
+        authorText.textContent = book.author
+        numPagesText.textContent = book.numPages;
+        readText.textContent = book.read;
+
+        card.appendChild(titleText);
+        card.appendChild(authorText);
+        card.appendChild(numPagesText);
+        card.appendChild(readText);
+
+        bookContainer.appendChild(card);
+    }
+}
