@@ -14,11 +14,9 @@ function addBookToLibrary(title, author, numPages, read) {
 }
 
 function displayLibrary() {
-    const bookContainer = document.querySelector(".book-container");
+    clearLibrary();
 
-    while(bookContainer.firstChild){
-        bookContainer.removeChild(bookContainer.firstChild)
-    }
+    const bookContainer = document.querySelector(".book-container");
 
     for (let book of myLibrary) {
         let card = document.createElement("div");
@@ -42,6 +40,15 @@ function displayLibrary() {
         bookContainer.appendChild(card);
     }
 }
+
+function clearLibrary() {
+    const bookContainer = document.querySelector(".book-container");
+
+    while (bookContainer.firstChild) {
+        bookContainer.removeChild(bookContainer.firstChild)
+    }
+}
+
 
 const addButton = document.querySelector(".btn.add");
 
