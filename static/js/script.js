@@ -13,8 +13,12 @@ function addBookToLibrary(title, author, numPages, read) {
     myLibrary.push(book)
 }
 
-function displayBook() {
+function displayLibrary() {
     const bookContainer = document.querySelector(".book-container");
+
+    while(bookContainer.firstChild){
+        bookContainer.removeChild(bookContainer.firstChild)
+    }
 
     for (let book of myLibrary) {
         let card = document.createElement("div");
@@ -56,5 +60,7 @@ submitButton.addEventListener("click", (event) => {
     numPages = document.querySelector("numPages");
     read = document.querySelector("#read").value;
 
-    addBookToLibrary(title, author, numPages, read)
+    addBookToLibrary(title, author, numPages, read);
+
+    displayLibrary();
 });
