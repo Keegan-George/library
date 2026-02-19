@@ -1,15 +1,15 @@
 const myLibrary = [];
 
-function Book(title, author, numPages) {
+function Book(title, author, numPages, read) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.numPages = numPages;
-    this.read = false;
+    this.read = read;
 }
 
-function addBookToLibrary(title, author, numPages) {
-    let book = new Book(title, author, numPages);
+function addBookToLibrary(title, author, numPages, read) {
+    let book = new Book(title, author, numPages, read);
     myLibrary.push(book)
 }
 
@@ -39,10 +39,22 @@ function displayBook() {
     }
 }
 
-
 const addButton = document.querySelector(".btn.add");
 
 addButton.addEventListener("click", () => {
     const form = document.querySelector("form");
     form.style.visibility = form.style.visibility === "" ? "visible" : "";
+});
+
+const submitButton = document.querySelector(".btn.submit");
+
+submitButton.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    title = document.querySelector("#title").value;
+    author = document.querySelector("#author").value;
+    numPages = document.querySelector("numPages");
+    read = document.querySelector("#read").value;
+
+    addBookToLibrary(title, author, numPages, read)
 });
