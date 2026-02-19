@@ -38,3 +38,11 @@ function displayBook() {
         bookContainer.appendChild(card);
     }
 }
+
+
+const addButton = document.querySelector(".btn.add");
+
+addButton.addEventListener("click", () => {
+    const form = document.querySelector("form");
+    form.style.visibility = form.style.visibility === "" ? "visible" : "";
+});
