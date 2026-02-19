@@ -64,7 +64,7 @@ submitButton.addEventListener("click", (event) => {
 
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
-    numPages = document.querySelector("numPages");
+    numPages = document.querySelector("#numPages").value;
     read = document.querySelector("#read").value;
 
     addBookToLibrary(title, author, numPages, read);
