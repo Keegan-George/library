@@ -30,7 +30,7 @@ function displayLibrary() {
         card.setAttribute("data-id", book.id);
 
         removeButton.classList.add("btn", "delete");
-        removeButton.addEventListener("click", () =>{
+        removeButton.addEventListener("click", () => {
             const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
             const index_bookToDelete = myLibrary.indexOf(bookToDelete);
             myLibrary.splice(index_bookToDelete, 1);
@@ -77,7 +77,7 @@ submitButton.addEventListener("click", (event) => {
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
     numPages = document.querySelector("#numPages").value;
-    read = document.querySelector("#read").value;
+    read = document.querySelector("#read").checked ? "yes": "no";
 
     addBookToLibrary(title, author, numPages, read);
 
