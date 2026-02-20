@@ -24,18 +24,30 @@ function displayLibrary() {
         let authorText = document.createElement("p");
         let numPagesText = document.createElement("p");
         let readText = document.createElement("p");
+        let removeButton = document.createElement("button");
 
         card.classList.add("card");
+        card.setAttribute("data-id", book.id);
+
+        removeButton.classList.add("btn", "delete");
+        removeButton.addEventListener("click", () =>{
+            const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
+            const index_bookToDelete = myLibrary.indexOf(bookToDelete);
+            myLibrary.splice(index_bookToDelete, 1);
+            displayLibrary();
+        });
 
         titleText.textContent = book.title;
         authorText.textContent = book.author
         numPagesText.textContent = book.numPages;
         readText.textContent = book.read;
+        removeButton.textContent = "remove";
 
         card.appendChild(titleText);
         card.appendChild(authorText);
         card.appendChild(numPagesText);
         card.appendChild(readText);
+        card.appendChild(removeButton);
 
         bookContainer.appendChild(card);
     }
