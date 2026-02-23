@@ -74,7 +74,6 @@ function clearLibrary() {
     }
 }
 
-
 const addButton = document.querySelector(".btn.add");
 
 addButton.addEventListener("click", () => {
@@ -82,9 +81,9 @@ addButton.addEventListener("click", () => {
     form.style.visibility = form.style.visibility === "" ? "visible" : "";
 });
 
-const submitButton = document.querySelector(".btn.submit");
+const bookForm = document.querySelector(".book-form");
 
-submitButton.addEventListener("click", (event) => {
+bookForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     title = document.querySelector("#title").value;
