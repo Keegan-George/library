@@ -8,6 +8,10 @@ function Book(title, author, numPages, read) {
     this.read = read;
 }
 
+Book.prototype.toggleReadStatus = function () {
+    this.read = this.read === "yes" ? "no" : "yes";
+}
+
 function addBookToLibrary(title, author, numPages, read) {
     let book = new Book(title, author, numPages, read);
     myLibrary.push(book)
@@ -25,6 +29,7 @@ function displayLibrary() {
         let numPagesText = document.createElement("p");
         let readText = document.createElement("p");
         let removeButton = document.createElement("button");
+        let readButton = document.createElement("button");
 
         card.classList.add("card");
         card.setAttribute("data-id", book.id);
@@ -37,17 +42,25 @@ function displayLibrary() {
             displayLibrary();
         });
 
+        readButton.classList.add("btn", "toggle-read");
+        readButton.addEventListener("click", () => {
+            book.toggleReadStatus();
+            readText.textContent = book.read;
+        });
+
         titleText.textContent = book.title;
         authorText.textContent = book.author
         numPagesText.textContent = book.numPages;
         readText.textContent = book.read;
         removeButton.textContent = "remove";
+        readButton.textContent = "read";
 
         card.appendChild(titleText);
         card.appendChild(authorText);
         card.appendChild(numPagesText);
         card.appendChild(readText);
         card.appendChild(removeButton);
+        card.appendChild(readButton);
 
         bookContainer.appendChild(card);
     }
@@ -77,7 +90,7 @@ submitButton.addEventListener("click", (event) => {
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
     numPages = document.querySelector("#numPages").value;
-    read = document.querySelector("#read").checked ? "yes": "no";
+    read = document.querySelector("#read").checked ? "yes" : "no";
 
     addBookToLibrary(title, author, numPages, read);
 
