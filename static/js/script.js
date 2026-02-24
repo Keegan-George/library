@@ -26,10 +26,12 @@ function displayLibrary() {
         let card = document.createElement("div");
         let bookInfo = document.createElement("div");
         let buttons = document.createElement("buttons");
-        let titleText = document.createElement("h3");
-        let authorText = document.createElement("p");
-        let pagesText = document.createElement("p");
-        let readText = document.createElement("p");
+        let title = document.createElement("h3");
+        let author = document.createElement("p");
+        let pages = document.createElement("div");
+        let numPages = document.createElement("p");
+        let pagesLabel = document.createElement("span");
+        let read = document.createElement("p");
         let removeButton = document.createElement("button");
         let readButton = document.createElement("button");
 
@@ -38,10 +40,12 @@ function displayLibrary() {
 
         bookInfo.classList.add("book-info");
         buttons.classList.add("buttons")
-        titleText.classList.add("title");
-        authorText.classList.add("author");
-        pagesText.classList.add("pages");
-        readText.classList.add("read");
+        title.classList.add("title");
+        author.classList.add("author");
+        pages.classList.add("pages");
+        numPages.classList.add("num-pages");
+        pagesLabel.classList.add("pages-label")
+        read.classList.add("read");
 
         removeButton.classList.add("btn", "delete");
         removeButton.addEventListener("click", () => {
@@ -54,18 +58,20 @@ function displayLibrary() {
         readButton.classList.add("btn", "toggle-read");
         readButton.addEventListener("click", () => {
             book.toggleReadStatus();
-            readText.textContent = book.read;
+            read.textContent = book.read;
         });
 
-        titleText.textContent = book.title;
-        authorText.textContent = book.author
-        pagesText.textContent = book.numPages;
-        readText.textContent = book.read;
+        title.textContent = book.title;
+        author.textContent = book.author
+        numPages.textContent = book.numPages;
+        pagesLabel.textContent = +book.numPages === 1 ? "page" : "pages";
+        read.textContent = book.read;
         removeButton.textContent = "remove";
         readButton.textContent = "read";
 
-        bookInfo.append(titleText, authorText, pagesText);
-        buttons.append(readText, removeButton, readButton)
+        pages.append(numPages, pagesLabel);
+        bookInfo.append(title, author, pages);
+        buttons.append(read, removeButton, readButton)
         card.append(bookInfo, buttons);
         bookContainer.appendChild(card);
     }
