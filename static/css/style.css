@@ -9,6 +9,10 @@
    --card-color: #C9D6DF;
    --author-color: #52616B;
    --font-color: #1E2022;
+   --button-color: #F4A261;
+   --button-hover-color: #E68A4F;
+   --button-active-color: #C96A2E;
+   --input-background-color: #E8EEF2;
 }
 
 body {
@@ -51,6 +55,50 @@ body {
    font-size: 0.8rem;
 }
 
-form {
+aside button {
+   padding: 0.3rem 0.5rem;
+   border-radius: 8px;
+   background-color: var(--button-color);
+}
+
+aside button:hover{
+   background-color: var(--button-hover-color);
+   transform: scale(1.05);
+}
+
+aside button:hover:active{
+   background-color: var(--button-active-color);
+}
+
+aside .btn.add {
+   margin: 0.3rem 0;
+}
+
+aside .book-form {
+   display: flex;
+   align-items: center;
    visibility: hidden;
+   gap: 0.8rem;
+}
+
+.book-form #numPages {
+   width: 4rem;
+}
+
+.book-form input {
+   padding: 0.20rem;
+   border-radius: 5px;
+   border: 1px solid black;
+   background-color: var(--input-background-color);
+}
+
+.book-form input:hover{
+   transform: scale(1.03);
+   border: 1.5px solid black;
+}
+
+.book-form .form-section{
+   display: flex;
+   align-items: center;
+   gap: 0.2rem;
 }
