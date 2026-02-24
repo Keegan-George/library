@@ -24,9 +24,11 @@ function displayLibrary() {
 
     for (let book of myLibrary) {
         let card = document.createElement("div");
+        let bookInfo = document.createElement("div");
+        let buttons = document.createElement("buttons");
         let titleText = document.createElement("h3");
         let authorText = document.createElement("p");
-        let numPagesText = document.createElement("p");
+        let pagesText = document.createElement("p");
         let readText = document.createElement("p");
         let removeButton = document.createElement("button");
         let readButton = document.createElement("button");
@@ -34,9 +36,11 @@ function displayLibrary() {
         card.classList.add("card");
         card.setAttribute("data-id", book.id);
 
+        bookInfo.classList.add("book-info");
+        buttons.classList.add("buttons")
         titleText.classList.add("title");
         authorText.classList.add("author");
-        numPagesText.classList.add("numPages");
+        pagesText.classList.add("pages");
         readText.classList.add("read");
 
         removeButton.classList.add("btn", "delete");
@@ -55,18 +59,14 @@ function displayLibrary() {
 
         titleText.textContent = book.title;
         authorText.textContent = book.author
-        numPagesText.textContent = book.numPages;
+        pagesText.textContent = book.numPages;
         readText.textContent = book.read;
         removeButton.textContent = "remove";
         readButton.textContent = "read";
 
-        card.appendChild(titleText);
-        card.appendChild(authorText);
-        card.appendChild(numPagesText);
-        card.appendChild(readText);
-        card.appendChild(removeButton);
-        card.appendChild(readButton);
-
+        bookInfo.append(titleText, authorText, pagesText);
+        buttons.append(readText, removeButton, readButton)
+        card.append(bookInfo, buttons);
         bookContainer.appendChild(card);
     }
 }
