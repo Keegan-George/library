@@ -9,12 +9,12 @@ function Book(title, author, numPages, read) {
 }
 
 Book.prototype.toggleReadStatus = function () {
-    this.read = this.read === "yes" ? "no" : "yes";
+    this.read = this.read ? false : true;
 }
 
 function addBookToLibrary(title, author, numPages, read) {
     let book = new Book(title, author, numPages, read);
-    myLibrary.push(book)
+    myLibrary.push(book);
 }
 
 function displayLibrary() {
@@ -31,7 +31,6 @@ function displayLibrary() {
         let pages = document.createElement("div");
         let numPages = document.createElement("p");
         let pagesLabel = document.createElement("span");
-        let read = document.createElement("p");
         let removeButton = document.createElement("button");
         let readButton = document.createElement("button");
 
@@ -45,7 +44,6 @@ function displayLibrary() {
         pages.classList.add("pages");
         numPages.classList.add("num-pages");
         pagesLabel.classList.add("pages-label")
-        read.classList.add("read");
 
         removeButton.classList.add("btn", "delete");
         removeButton.addEventListener("click", () => {
@@ -58,20 +56,19 @@ function displayLibrary() {
         readButton.classList.add("btn", "toggle-read");
         readButton.addEventListener("click", () => {
             book.toggleReadStatus();
-            read.textContent = book.read;
+            readButton.textContent = book.read ? "read": "not read";
         });
 
         title.textContent = book.title;
         author.textContent = book.author
         numPages.textContent = book.numPages;
         pagesLabel.textContent = +book.numPages === 1 ? "page" : "pages";
-        read.textContent = book.read;
         removeButton.textContent = "remove";
-        readButton.textContent = "read";
+        readButton.textContent = book.read ? "read": "not read";
 
         pages.append(numPages, pagesLabel);
         bookInfo.append(title, author, pages);
-        buttons.append(read, removeButton, readButton)
+        buttons.append(readButton, removeButton);
         card.append(bookInfo, buttons);
         bookContainer.appendChild(card);
     }
@@ -100,7 +97,7 @@ bookForm.addEventListener("submit", (event) => {
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
     numPages = document.querySelector("#numPages").value;
-    read = document.querySelector("#read").checked ? "yes" : "no";
+    read = document.querySelector("#read").checked ? true : false;
 
     addBookToLibrary(title, author, numPages, read);
 
