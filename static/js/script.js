@@ -34,6 +34,11 @@ function displayLibrary() {
         card.classList.add("card");
         card.setAttribute("data-id", book.id);
 
+        titleText.classList.add("title");
+        authorText.classList.add("author");
+        numPagesText.classList.add("numPages");
+        readText.classList.add("read");
+
         removeButton.classList.add("btn", "delete");
         removeButton.addEventListener("click", () => {
             const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
