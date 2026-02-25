@@ -6,7 +6,7 @@ const bookContainer = document.querySelector(".book-container");
 //class constants
 const CLASS_CARD = "card";
 const CLASS_BUTTON = "btn";
-const CLASS_REMOVE = "remove";
+const CLASS_REMOVE = "remove-button";
 const CLASS_READ_BUTTON = "read-button";
 
 

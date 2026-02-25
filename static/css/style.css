@@ -73,7 +73,7 @@ body {
    gap: 1rem;
 }
 
-.card .btn.remove,
+.card .remove-button,
 .card .read-button {
    text-align: center;
    width: 3.5rem;
@@ -86,15 +86,15 @@ body {
    border-radius: 50%;
 }
 
-.card .btn.remove {
+.card .remove-button {
    background-color: var(--remove-button-color);
 }
 
-.card .btn.remove:hover {
+.card .remove-button:hover {
    background-color: var(--remove-button-hover-color);
 }
 
-.card .btn.remove:hover:active {
+.card .remove-button:hover:active {
    background-color: var(--remove-button-active-color);
 }
 
