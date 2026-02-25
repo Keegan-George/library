@@ -122,26 +122,26 @@ body {
    background-color: var(--read-button-enable-active-color);
 }
 
-aside button {
+section button {
    padding: 0.3rem 0.5rem;
    border-radius: 8px;
    background-color: var(--button-color);
 }
 
-aside button:hover {
+section button:hover {
    background-color: var(--button-hover-color);
    transform: scale(1.05);
 }
 
-aside button:hover:active {
+section button:hover:active {
    background-color: var(--button-active-color);
 }
 
-aside .add-button {
+section .add-button {
    margin: 0.3rem 0;
 }
 
-aside .book-form {
+section .book-form {
    display: flex;
    align-items: center;
    visibility: hidden;
