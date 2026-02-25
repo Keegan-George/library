@@ -84,9 +84,7 @@ function displayLibrary() {
 }
 
 function clearLibrary() {
-    while (bookContainer.firstChild) {
-        bookContainer.removeChild(bookContainer.firstChild)
-    }
+    bookContainer.innerHTML = "";
 }
 
 const addButton = document.querySelector(".add-button");
