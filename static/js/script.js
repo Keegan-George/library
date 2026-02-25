@@ -24,28 +24,37 @@ function displayLibrary() {
 
     for (let book of myLibrary) {
         let card = document.createElement("div");
-        let bookInfo = document.createElement("div");
-        let buttons = document.createElement("div");
-        let title = document.createElement("h3");
-        let author = document.createElement("p");
-        let pages = document.createElement("div");
-        let numPages = document.createElement("p");
-        let pagesLabel = document.createElement("span");
-        let removeButton = document.createElement("button");
-        let readButton = document.createElement("button");
-
         card.classList.add("card");
         card.setAttribute("data-id", book.id);
 
+        let bookInfo = document.createElement("div");
         bookInfo.classList.add("book-info");
-        buttons.classList.add("buttons")
-        title.classList.add("title");
-        author.classList.add("author");
-        pages.classList.add("pages");
-        numPages.classList.add("num-pages");
-        pagesLabel.classList.add("pages-label")
 
+        let buttons = document.createElement("div");
+        buttons.classList.add("buttons")
+
+        let title = document.createElement("h3");
+        title.classList.add("title");
+        title.textContent = book.title;
+
+        let author = document.createElement("p");
+        author.classList.add("author");
+        author.textContent = book.author
+
+        let pages = document.createElement("div");
+        pages.classList.add("pages");
+
+        let numPages = document.createElement("p");
+        numPages.classList.add("num-pages");
+        numPages.textContent = book.numPages;
+        
+        let pagesLabel = document.createElement("span");
+        pagesLabel.classList.add("pages-label")
+        pagesLabel.textContent = book.numPages === 1 ? "page" : "pages";
+
+        let removeButton = document.createElement("button");
         removeButton.classList.add("btn", "remove");
+        removeButton.textContent = "remove";
         removeButton.addEventListener("click", () => {
             const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
             const index_bookToDelete = myLibrary.indexOf(bookToDelete);
@@ -53,19 +62,14 @@ function displayLibrary() {
             displayLibrary();
         });
 
+        let readButton = document.createElement("button");
         readButton.classList.add("btn", "read-button");
+        readButton.textContent = "not read";
         readButton.addEventListener("click", () => {
             book.toggleReadStatus();
             readButton.textContent = book.read ? "read" : "not read";
             readButton.classList.toggle("read");
         });
-
-        title.textContent = book.title;
-        author.textContent = book.author
-        numPages.textContent = book.numPages;
-        pagesLabel.textContent = book.numPages === 1 ? "page" : "pages";
-        removeButton.textContent = "remove";
-        readButton.textContent = "not read";
 
         pages.append(numPages, pagesLabel);
         bookInfo.append(title, author, pages);
