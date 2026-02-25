@@ -18,7 +18,7 @@ const bookContainer = document.querySelector(".book-container");
 
 bookContainer.addEventListener("click", (event) => {
     const targetElement = event.target;
-    const card = targetElement.closest(".card");
+    const card = targetElement.closest(`.${CLASS_CARD}`);
     if (!card) return;
 
     const cardId = card.getAttribute("data-id");
