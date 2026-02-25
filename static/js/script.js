@@ -69,7 +69,7 @@ function displayLibrary() {
                 <h3 class="title">${escapeHTML(book.title)}</h3>
                 <p class="author">${escapeHTML(book.author)}</p>
                 <div class="pages">
-                    <p class="num-pages">${escapeHTML(book.numPages)}</p><span class="pages-label">${escapeHTML(book.numPages) === 1 ? "page" : "pages"}</span>
+                    <p class="num-pages">${book.numPages}</p><span class="pages-label">${book.numPages === 1 ? "page" : "pages"}</span>
                 </div>
             </div>
 
@@ -109,7 +109,7 @@ form.addEventListener("submit", (event) => {
 });
 
 function escapeHTML(str) {
-    return String(str).replace(/[&<>"']/g, char => ({
+    return str.replace(/[&<>"']/g, char => ({
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
