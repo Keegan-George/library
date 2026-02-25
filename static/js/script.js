@@ -12,8 +12,8 @@ Book.prototype.toggleReadStatus = function () {
     this.read = this.read ? false : true;
 }
 
-function addBookToLibrary(title, author, numPages, read) {
-    let book = new Book(title, author, numPages, read);
+function addBookToLibrary(title, author, numPages) {
+    let book = new Book(title, author, numPages);
     myLibrary.push(book);
 }
 
@@ -45,7 +45,7 @@ function displayLibrary() {
         numPages.classList.add("num-pages");
         pagesLabel.classList.add("pages-label")
 
-        removeButton.classList.add("btn", "delete");
+        removeButton.classList.add("btn", "remove");
         removeButton.addEventListener("click", () => {
             const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
             const index_bookToDelete = myLibrary.indexOf(bookToDelete);
@@ -57,6 +57,7 @@ function displayLibrary() {
         readButton.addEventListener("click", () => {
             book.toggleReadStatus();
             readButton.textContent = book.read ? "read": "not read";
+            readButton.classList.toggle("read");
         });
 
         title.textContent = book.title;
@@ -64,7 +65,7 @@ function displayLibrary() {
         numPages.textContent = book.numPages;
         pagesLabel.textContent = +book.numPages === 1 ? "page" : "pages";
         removeButton.textContent = "remove";
-        readButton.textContent = book.read ? "read": "not read";
+        readButton.textContent = "not read";
 
         pages.append(numPages, pagesLabel);
         bookInfo.append(title, author, pages);
@@ -97,9 +98,8 @@ bookForm.addEventListener("submit", (event) => {
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
     numPages = document.querySelector("#numPages").value;
-    read = document.querySelector("#read").checked ? true : false;
 
-    addBookToLibrary(title, author, numPages, read);
+    addBookToLibrary(title, author, numPages);
 
     displayLibrary();
 });
