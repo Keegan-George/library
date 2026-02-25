@@ -11,7 +11,7 @@ const CLASS_VISIBLE = "visible";
 //button labels
 const REMOVE_BUTTON_TEXT = "remove";
 const READ_BUTTON_ENABLED_TEXT = "read";
-const READ_BUTTON_DISABLED_TEXT = "not read";
+const READ_BUTTON_DISABLED_TEXT = "unread";
 
 //book container
 const bookContainer = document.querySelector(".book-container");
