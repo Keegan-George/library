@@ -13,7 +13,7 @@ Book.prototype.toggleReadStatus = function () {
 }
 
 function addBookToLibrary(title, author, numPages) {
-    let book = new Book(title, author, numPages);
+    const book = new Book(title, author, numPages);
     myLibrary.push(book);
 }
 
@@ -95,9 +95,9 @@ const bookForm = document.querySelector(".book-form");
 bookForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    title = document.querySelector("#title").value;
-    author = document.querySelector("#author").value;
-    numPages = Number(document.querySelector("#numPages").value);
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const numPages = Number(document.querySelector("#numPages").value);
 
     addBookToLibrary(title, author, numPages);
 
