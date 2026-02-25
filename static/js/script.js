@@ -16,6 +16,14 @@ const READ_BUTTON_DISABLED_TEXT = "not read";
 //book container
 const bookContainer = document.querySelector(".book-container");
 
+/**
+ * Handles click events inside the book container.
+ * Detects whether the user clicked a read-toggle button or a remove button,
+ * updates the corresponding book, and refreshes the display if needed.
+ *
+ * @param {MouseEvent} event - The click event.
+ * @returns {void}
+ */
 bookContainer.addEventListener("click", (event) => {
     const targetElement = event.target;
     const card = targetElement.closest(`.${CLASS_CARD}`);
@@ -38,7 +46,14 @@ bookContainer.addEventListener("click", (event) => {
 });
 
 
-//book constructor
+/**
+ * Creates a new Book object and assigns it a unique ID.
+ *
+ * @constructor
+ * @param {string} title - The title of the book.
+ * @param {string} author - The author of the book.
+ * @param {number} numPages - The number of pages in the book.
+ */
 function Book(title, author, numPages) {
     this.id = crypto.randomUUID();
     this.title = title;
@@ -47,15 +62,35 @@ function Book(title, author, numPages) {
     this.read = false;
 }
 
+/**
+ * Toggles the read status of the book.
+ *
+ * @method
+ * @returns {void}
+ */
 Book.prototype.toggleReadStatus = function () {
     this.read = !this.read;
 }
 
+/**
+ * Creates a new Book object and adds it to the library.
+ *
+ * @param {string} title - The title of the book.
+ * @param {string} author - The author of the book.
+ * @param {number} numPages - The number of pages in the book.
+ * @returns {void}
+ */
 function addBookToLibrary(title, author, numPages) {
     const book = new Book(title, author, numPages);
     myLibrary.push(book);
 }
 
+/**
+ * Displays all books in the library to the DOM.
+ * Clears the existing display and recreates each book card.
+ *
+ * @returns {void}
+ */
 function displayLibrary() {
     clearLibrary();
 
@@ -83,6 +118,11 @@ function displayLibrary() {
     }
 }
 
+/**
+ * Removes all book from the DOM.
+ *
+ * @returns {void}
+ */
 function clearLibrary() {
     bookContainer.innerHTML = "";
 }
@@ -94,6 +134,14 @@ addButton.addEventListener("click", () => {
     form.classList.toggle(CLASS_VISIBLE);
 });
 
+/**
+ * Handles the book form submission.
+ * Prevents page reload on form submission, extracts form values, 
+ * adds a new book, resets the form, and updates the displayed library.
+ *
+ * @param {SubmitEvent} event - The form submission event.
+ * @returns {void}
+ */
 form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -108,6 +156,12 @@ form.addEventListener("submit", (event) => {
     displayLibrary();
 });
 
+/**
+ * Escapes HTML special characters to prevent XSS injection.
+ *
+ * @param {string} str - The string to sanitize.
+ * @returns {string} The sanitized string with HTML entities encoded.
+ */
 function escapeHTML(str) {
     return str.replace(/[&<>"']/g, char => ({
         "&": "&amp;",
