@@ -52,13 +52,13 @@ bookContainer.addEventListener("click", (event) => {
  * @constructor
  * @param {string} title - The title of the book.
  * @param {string} author - The author of the book.
- * @param {number} numPages - The number of pages in the book.
+ * @param {number} pageCount - The number of pages in the book.
  */
-function Book(title, author, numPages) {
+function Book(title, author, pageCount) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
-    this.numPages = numPages;
+    this.pageCount = pageCount;
     this.read = false;
 }
 
@@ -77,11 +77,11 @@ Book.prototype.toggleReadStatus = function () {
  *
  * @param {string} title - The title of the book.
  * @param {string} author - The author of the book.
- * @param {number} numPages - The number of pages in the book.
+ * @param {number} pageCount - The number of pages in the book.
  * @returns {void}
  */
-function addBookToLibrary(title, author, numPages) {
-    const book = new Book(title, author, numPages);
+function addBookToLibrary(title, author, pageCount) {
+    const book = new Book(title, author, pageCount);
     myLibrary.push(book);
 }
 
@@ -104,7 +104,7 @@ function displayLibrary() {
                 <h3 class="title">${escapeHTML(book.title)}</h3>
                 <p class="author">${escapeHTML(book.author)}</p>
                 <div class="pages">
-                    <p class="num-pages">${book.numPages}</p><span class="pages-label">${book.numPages === 1 ? "page" : "pages"}</span>
+                    <p class="num-pages">${book.pageCount}</p><span class="pages-label">${book.pageCount === 1 ? "page" : "pages"}</span>
                 </div>
             </div>
 
@@ -147,11 +147,11 @@ form.addEventListener("submit", (event) => {
 
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
-    const numPages = Number(document.querySelector("#numPages").value);
+    const pageCount = Number(document.querySelector("#page-count").value);
 
     form.reset();
 
-    addBookToLibrary(title, author, numPages);
+    addBookToLibrary(title, author, pageCount);
 
     displayLibrary();
 });
