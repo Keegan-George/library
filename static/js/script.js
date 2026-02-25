@@ -99,6 +99,8 @@ bookForm.addEventListener("submit", (event) => {
     const author = document.querySelector("#author").value;
     const numPages = Number(document.querySelector("#numPages").value);
 
+    bookForm.reset();
+
     addBookToLibrary(title, author, numPages);
 
     displayLibrary();
