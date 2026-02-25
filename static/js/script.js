@@ -3,6 +3,12 @@ const myLibrary = [];
 //cache the book container
 const bookContainer = document.querySelector(".book-container");
 
+//class constants
+const CLASS_CARD = "card";
+const CLASS_BUTTON = "btn";
+const CLASS_REMOVE = "remove";
+const CLASS_READ_BUTTON = "read-button";
+
 
 function Book(title, author, numPages) {
     this.id = crypto.randomUUID();
@@ -26,7 +32,7 @@ function displayLibrary() {
 
     for (let book of myLibrary) {
         let card = document.createElement("div");
-        card.classList.add("card");
+        card.classList.add(CLASS_CARD);
         card.setAttribute("data-id", book.id);
 
         let bookInfo = document.createElement("div");
@@ -55,7 +61,7 @@ function displayLibrary() {
         pagesLabel.textContent = book.numPages === 1 ? "page" : "pages";
 
         let removeButton = document.createElement("button");
-        removeButton.classList.add("btn", "remove");
+        removeButton.classList.add(CLASS_BUTTON, CLASS_REMOVE);
         removeButton.textContent = "remove";
         removeButton.addEventListener("click", () => {
             const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
@@ -65,7 +71,7 @@ function displayLibrary() {
         });
 
         let readButton = document.createElement("button");
-        readButton.classList.add("btn", "read-button");
+        readButton.classList.add(CLASS_BUTTON, CLASS_READ_BUTTON);
         readButton.textContent = "not read";
         readButton.addEventListener("click", () => {
             book.toggleReadStatus();
