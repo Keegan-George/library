@@ -63,7 +63,7 @@ function displayLibrary() {
         title.textContent = book.title;
         author.textContent = book.author
         numPages.textContent = book.numPages;
-        pagesLabel.textContent = +book.numPages === 1 ? "page" : "pages";
+        pagesLabel.textContent = book.numPages === 1 ? "page" : "pages";
         removeButton.textContent = "remove";
         readButton.textContent = "not read";
 
@@ -97,7 +97,7 @@ bookForm.addEventListener("submit", (event) => {
 
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
-    numPages = document.querySelector("#numPages").value;
+    numPages = Number(document.querySelector("#numPages").value);
 
     addBookToLibrary(title, author, numPages);
 
