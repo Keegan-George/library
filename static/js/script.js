@@ -25,7 +25,7 @@ function displayLibrary() {
     for (let book of myLibrary) {
         let card = document.createElement("div");
         let bookInfo = document.createElement("div");
-        let buttons = document.createElement("buttons");
+        let buttons = document.createElement("div");
         let title = document.createElement("h3");
         let author = document.createElement("p");
         let pages = document.createElement("div");
