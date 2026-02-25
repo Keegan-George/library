@@ -8,6 +8,13 @@ const CLASS_CARD = "card";
 const CLASS_BUTTON = "btn";
 const CLASS_REMOVE = "remove-button";
 const CLASS_READ_BUTTON = "read-button";
+const CLASS_READ = "read";
+const CLASS_VISIBLE = "visible";
+
+//button labels
+const REMOVE_BUTTON_TEXT = "remove";
+const READ_BUTTON_ENABLED_TEXT = "read";
+const READ_BUTTON_DISABLED_TEXT = "not read";
 
 
 function Book(title, author, numPages) {
@@ -47,7 +54,7 @@ function displayLibrary() {
 
         let author = document.createElement("p");
         author.classList.add("author");
-        author.textContent = book.author
+        author.textContent = book.author;
 
         let pages = document.createElement("div");
         pages.classList.add("pages");
@@ -62,7 +69,7 @@ function displayLibrary() {
 
         let removeButton = document.createElement("button");
         removeButton.classList.add(CLASS_BUTTON, CLASS_REMOVE);
-        removeButton.textContent = "remove";
+        removeButton.textContent = REMOVE_BUTTON_TEXT;
         removeButton.addEventListener("click", () => {
             const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
             const index_bookToDelete = myLibrary.indexOf(bookToDelete);
@@ -72,11 +79,11 @@ function displayLibrary() {
 
         let readButton = document.createElement("button");
         readButton.classList.add(CLASS_BUTTON, CLASS_READ_BUTTON);
-        readButton.textContent = "not read";
+        readButton.textContent = READ_BUTTON_DISABLED_TEXT;
         readButton.addEventListener("click", () => {
             book.toggleReadStatus();
-            readButton.textContent = book.read ? "read" : "not read";
-            readButton.classList.toggle("read");
+            readButton.textContent = book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT;
+            readButton.classList.toggle(CLASS_READ);
         });
 
         pages.append(numPages, pagesLabel);
@@ -97,7 +104,7 @@ const addButton = document.querySelector(".add-button");
 
 addButton.addEventListener("click", () => {
     const form = document.querySelector("form");
-    form.classList.toggle("visible");
+    form.classList.toggle(CLASS_VISIBLE);
 });
 
 const bookForm = document.querySelector(".book-form");
