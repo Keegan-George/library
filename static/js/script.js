@@ -1,11 +1,11 @@
 const myLibrary = [];
 
-function Book(title, author, numPages, read) {
+function Book(title, author, numPages) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.numPages = numPages;
-    this.read = read;
+    this.read = undefined;
 }
 
 Book.prototype.toggleReadStatus = function () {
