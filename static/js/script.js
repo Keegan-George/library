@@ -48,7 +48,7 @@ function Book(title, author, numPages) {
 }
 
 Book.prototype.toggleReadStatus = function () {
-    this.read = this.read ? false : true;
+    this.read = !this.read;
 }
 
 function addBookToLibrary(title, author, numPages) {
@@ -74,7 +74,7 @@ function displayLibrary() {
             </div>
 
             <div class="buttons">
-                <button class="${CLASS_BUTTON} ${CLASS_READ_BUTTON}">${READ_BUTTON_DISABLED_TEXT}</button>
+                <button class="${CLASS_BUTTON} ${CLASS_READ_BUTTON} ${book.read ? CLASS_READ : ""}">${book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT}</button>
                 <button class="${CLASS_BUTTON} ${CLASS_REMOVE_BUTTON}">${REMOVE_BUTTON_TEXT}</button>
             </div>
         `;
