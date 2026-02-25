@@ -148,6 +148,10 @@ section .book-form {
    gap: 0.8rem;
 }
 
+section .book-form.visible {
+   visibility: visible;
+}
+
 .book-form #numPages {
    width: 4rem;
 }

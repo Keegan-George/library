@@ -87,7 +87,7 @@ const addButton = document.querySelector(".add-button");
 
 addButton.addEventListener("click", () => {
     const form = document.querySelector("form");
-    form.style.visibility = form.style.visibility === "" ? "visible" : "";
+    form.classList.toggle("visible");
 });
 
 const bookForm = document.querySelector(".book-form");
