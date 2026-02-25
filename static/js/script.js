@@ -37,12 +37,14 @@ bookContainer.addEventListener("click", (event) => {
     }
 });
 
+
+//book constructor
 function Book(title, author, numPages) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.numPages = numPages;
-    this.read = undefined;
+    this.read = false;
 }
 
 Book.prototype.toggleReadStatus = function () {
@@ -76,6 +78,7 @@ function displayLibrary() {
                 <button class="${CLASS_BUTTON} ${CLASS_REMOVE_BUTTON}">${REMOVE_BUTTON_TEXT}</button>
             </div>
         `;
+
         bookContainer.appendChild(card);
     }
 }
