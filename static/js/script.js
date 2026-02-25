@@ -88,22 +88,20 @@ function clearLibrary() {
 }
 
 const addButton = document.querySelector(".add-button");
+const form = document.querySelector(".book-form");
 
 addButton.addEventListener("click", () => {
-    const form = document.querySelector("form");
     form.classList.toggle(CLASS_VISIBLE);
 });
 
-const bookForm = document.querySelector(".book-form");
-
-bookForm.addEventListener("submit", (event) => {
+form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
     const numPages = Number(document.querySelector("#numPages").value);
 
-    bookForm.reset();
+    form.reset();
 
     addBookToLibrary(title, author, numPages);
 
