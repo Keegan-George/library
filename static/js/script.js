@@ -53,10 +53,10 @@ function displayLibrary() {
             displayLibrary();
         });
 
-        readButton.classList.add("btn", "toggle-read");
+        readButton.classList.add("btn", "read-button");
         readButton.addEventListener("click", () => {
             book.toggleReadStatus();
-            readButton.textContent = book.read ? "read": "not read";
+            readButton.textContent = book.read ? "read" : "not read";
             readButton.classList.toggle("read");
         });
 
@@ -83,7 +83,7 @@ function clearLibrary() {
     }
 }
 
-const addButton = document.querySelector(".btn.add");
+const addButton = document.querySelector(".add-button");
 
 addButton.addEventListener("click", () => {
     const form = document.querySelector("form");

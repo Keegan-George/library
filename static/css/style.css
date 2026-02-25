@@ -16,12 +16,12 @@
    --remove-button-color: #D9534F;
    --remove-button-hover-color: #A93E3A;
    --remove-button-active-color: #8F3532;
-   --read-button-neutral-color: #BFC8CE;
-   --read-button-neutral-hover-color: #AAB4BA;
-   --read-button-neutral-active-color: #949EA4;
-   --read-button-complete-color: #4CAF50;
-   --read-button-complete-hover-color: #449D48;
-   --read-button-complete-active-color: #3A873E;
+   --read-button-disable-color: #BFC8CE;
+   --read-button-disable-hover-color: #AAB4BA;
+   --read-button-disable-active-color: #949EA4;
+   --read-button-enable-color: #4CAF50;
+   --read-button-enable-hover-color: #449D48;
+   --read-button-enable-active-color: #3A873E;
 }
 
 body {
@@ -73,7 +73,8 @@ body {
    gap: 1rem;
 }
 
-.card .btn.remove, .card .btn.toggle-read{
+.card .btn.remove,
+.card .read-button {
    text-align: center;
    width: 3.5rem;
    height: 3.5rem;
@@ -81,7 +82,7 @@ body {
    font-weight: 700;
 }
 
-.card .btn.toggle-read{
+.card .read-button {
    border-radius: 50%;
 }
 
@@ -97,28 +98,28 @@ body {
    background-color: var(--remove-button-active-color);
 }
 
-.card .btn.toggle-read {
-   background-color: var(--read-button-neutral-color);
+.card .read-button {
+   background-color: var(--read-button-disable-color);
 }
 
-.card .btn.toggle-read:hover {
-   background-color: var(--read-button-neutral-hover-color);
+.card .read-button:hover {
+   background-color: var(--read-button-disable-hover-color);
 }
 
-.card .btn.toggle-read:hover:active {
-   background-color: var(--read-button-neutral-active-color);
+.card .read-button:hover:active {
+   background-color: var(--read-button-disable-active-color);
 }
 
-.card .btn.toggle-read.read {
-   background-color: var(--read-button-complete-color);
+.card .read-button.read {
+   background-color: var(--read-button-enable-color);
 }
 
-.card .btn.toggle-read.read:hover {
-   background-color: var(--read-button-complete-hover-color);
+.card .read-button.read:hover {
+   background-color: var(--read-button-enable-hover-color);
 }
 
-.card .btn.toggle-read.read:hover:active {
-   background-color: var(--read-button-complete-active-color);
+.card .read-button.read:hover:active {
+   background-color: var(--read-button-enable-active-color);
 }
 
 aside button {
@@ -136,7 +137,7 @@ aside button:hover:active {
    background-color: var(--button-active-color);
 }
 
-aside .btn.add {
+aside .add-button {
    margin: 0.3rem 0;
 }
 
