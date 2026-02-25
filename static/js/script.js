@@ -62,43 +62,20 @@ function displayLibrary() {
         card.classList.add(CLASS_CARD);
         card.setAttribute("data-id", book.id);
 
-        let bookInfo = document.createElement("div");
-        bookInfo.classList.add("book-info");
+        card.innerHTML = `
+            <div class="book-info">
+                <h3 class="title">${book.title}</h3>
+                <p class="author">${book.author}</p>
+                <div class="pages">
+                    <p class="num-pages">${book.numPages}</p><span class="pages-label">${book.numPages === 1 ? "page" : "pages"}</span>
+                </div>
+            </div>
 
-        let buttons = document.createElement("div");
-        buttons.classList.add("buttons")
-
-        let title = document.createElement("h3");
-        title.classList.add("title");
-        title.textContent = book.title;
-
-        let author = document.createElement("p");
-        author.classList.add("author");
-        author.textContent = book.author;
-
-        let pages = document.createElement("div");
-        pages.classList.add("pages");
-
-        let numPages = document.createElement("p");
-        numPages.classList.add("num-pages");
-        numPages.textContent = book.numPages;
-
-        let pagesLabel = document.createElement("span");
-        pagesLabel.classList.add("pages-label")
-        pagesLabel.textContent = book.numPages === 1 ? "page" : "pages";
-
-        let removeButton = document.createElement("button");
-        removeButton.classList.add(CLASS_BUTTON, CLASS_REMOVE_BUTTON);
-        removeButton.textContent = REMOVE_BUTTON_TEXT;
-
-        let readButton = document.createElement("button");
-        readButton.classList.add(CLASS_BUTTON, CLASS_READ_BUTTON);
-        readButton.textContent = READ_BUTTON_DISABLED_TEXT;
-
-        pages.append(numPages, pagesLabel);
-        bookInfo.append(title, author, pages);
-        buttons.append(readButton, removeButton);
-        card.append(bookInfo, buttons);
+            <div class="buttons">
+                <button class="${CLASS_BUTTON} ${CLASS_READ_BUTTON}">${READ_BUTTON_DISABLED_TEXT}</button>
+                <button class="${CLASS_BUTTON} ${CLASS_REMOVE_BUTTON}">${REMOVE_BUTTON_TEXT}</button>
+            </div>
+        `;
         bookContainer.appendChild(card);
     }
 }
