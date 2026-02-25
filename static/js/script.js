@@ -1,12 +1,9 @@
 const myLibrary = [];
 
-//cache the book container
-const bookContainer = document.querySelector(".book-container");
-
 //class constants
 const CLASS_CARD = "card";
 const CLASS_BUTTON = "btn";
-const CLASS_REMOVE = "remove-button";
+const CLASS_REMOVE_BUTTON = "remove-button";
 const CLASS_READ_BUTTON = "read-button";
 const CLASS_READ = "read";
 const CLASS_VISIBLE = "visible";
@@ -16,6 +13,29 @@ const REMOVE_BUTTON_TEXT = "remove";
 const READ_BUTTON_ENABLED_TEXT = "read";
 const READ_BUTTON_DISABLED_TEXT = "not read";
 
+//book container
+const bookContainer = document.querySelector(".book-container");
+
+bookContainer.addEventListener("click", (event) => {
+    const targetElement = event.target;
+    const card = targetElement.closest(".card");
+    if (!card) return;
+
+    const cardId = card.getAttribute("data-id");
+    const book = myLibrary.find(book => book.id === cardId)
+
+    if (targetElement.classList.contains(CLASS_READ_BUTTON)) {
+        book.toggleReadStatus();
+        targetElement.textContent = book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT;
+        targetElement.classList.toggle(CLASS_READ);
+    }
+
+    else if (targetElement.classList.contains(CLASS_REMOVE_BUTTON)) {
+        const index = myLibrary.indexOf(book);
+        myLibrary.splice(index, 1);
+        displayLibrary();
+    }
+});
 
 function Book(title, author, numPages) {
     this.id = crypto.randomUUID();
@@ -68,23 +88,12 @@ function displayLibrary() {
         pagesLabel.textContent = book.numPages === 1 ? "page" : "pages";
 
         let removeButton = document.createElement("button");
-        removeButton.classList.add(CLASS_BUTTON, CLASS_REMOVE);
+        removeButton.classList.add(CLASS_BUTTON, CLASS_REMOVE_BUTTON);
         removeButton.textContent = REMOVE_BUTTON_TEXT;
-        removeButton.addEventListener("click", () => {
-            const bookToDelete = myLibrary.find(b => b.id === card.getAttribute("data-id"));
-            const index_bookToDelete = myLibrary.indexOf(bookToDelete);
-            myLibrary.splice(index_bookToDelete, 1);
-            displayLibrary();
-        });
 
         let readButton = document.createElement("button");
         readButton.classList.add(CLASS_BUTTON, CLASS_READ_BUTTON);
         readButton.textContent = READ_BUTTON_DISABLED_TEXT;
-        readButton.addEventListener("click", () => {
-            book.toggleReadStatus();
-            readButton.textContent = book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT;
-            readButton.classList.toggle(CLASS_READ);
-        });
 
         pages.append(numPages, pagesLabel);
         bookInfo.append(title, author, pages);
