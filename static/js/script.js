@@ -1,5 +1,9 @@
 const myLibrary = [];
 
+//cache the book container
+const bookContainer = document.querySelector(".book-container");
+
+
 function Book(title, author, numPages) {
     this.id = crypto.randomUUID();
     this.title = title;
@@ -19,8 +23,6 @@ function addBookToLibrary(title, author, numPages) {
 
 function displayLibrary() {
     clearLibrary();
-
-    const bookContainer = document.querySelector(".book-container");
 
     for (let book of myLibrary) {
         let card = document.createElement("div");
@@ -47,7 +49,7 @@ function displayLibrary() {
         let numPages = document.createElement("p");
         numPages.classList.add("num-pages");
         numPages.textContent = book.numPages;
-        
+
         let pagesLabel = document.createElement("span");
         pagesLabel.classList.add("pages-label")
         pagesLabel.textContent = book.numPages === 1 ? "page" : "pages";
@@ -80,8 +82,6 @@ function displayLibrary() {
 }
 
 function clearLibrary() {
-    const bookContainer = document.querySelector(".book-container");
-
     while (bookContainer.firstChild) {
         bookContainer.removeChild(bookContainer.firstChild)
     }
