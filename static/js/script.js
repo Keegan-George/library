@@ -90,7 +90,7 @@ class Library {
      * Retrieves a book from the library by its id.
      * 
      * @param {string} id - The id of the book
-     * @returns {Book} - The book
+     * @returns {?Book} - The book, or null if not found
      */
     getBook(id) {
         return this.books.find(book => book.id === id);
