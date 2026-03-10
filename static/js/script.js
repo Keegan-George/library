@@ -14,18 +14,6 @@ const REMOVE_BUTTON_TEXT = "remove";
 const READ_BUTTON_ENABLED_TEXT = "read";
 const READ_BUTTON_DISABLED_TEXT = "unread";
 
-//default set of books for display in library
-const BOOKS = [
-    new Book("Moby Dick", "Herman Melville", 585),
-    new Book("The Lord of the Flies", "William Golding", 224),
-    new Book("The Catch in the Rye", "J.D. Salinger", 277),
-    new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
-    new Book("To Kill a Mockingbird", "Harper Lee", 281),
-    new Book("Pride and Prejudice", "Jane Austen", 328),
-]
-const myLibrary = BOOKS;
-displayLibrary();
-
 /**
  * Handles click events inside the book container.
  * Detects whether the user clicked a read-toggle button or a remove button,
@@ -57,30 +45,38 @@ bookContainer.addEventListener("click", (event) => {
 
 
 /**
- * Creates a new Book object and assigns it a unique ID.
+ * Represents a book object
  *
- * @constructor
  * @param {string} title - The title of the book.
  * @param {string} author - The author of the book.
  * @param {number} pageCount - The number of pages in the book.
  */
-function Book(title, author, pageCount) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pageCount = pageCount;
-    this.read = false;
+class Book {
+    /**
+     * Creates a new Book instance
+     *
+     * @param {string} title - The title of the book.
+     * @param {string} author - The author of the book.
+     * @param {number} pageCount - The number of pages in the book.
+     */
+    constructor(title, author, pageCount) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pageCount = pageCount;
+        this.read = false;
+    }
+
+    /**
+     * Toggles the read status of the book.
+     *
+     * @returns {void}
+     */
+    toggleReadStatus() {
+        this.read = !this.read;
+    }
 }
 
-/**
- * Toggles the read status of the book.
- *
- * @method
- * @returns {void}
- */
-Book.prototype.toggleReadStatus = function () {
-    this.read = !this.read;
-}
 
 /**
  * Creates a new Book object and adds it to the library.
@@ -181,3 +177,15 @@ function escapeHTML(str) {
         "'": "&#39;"
     }[char]));
 }
+
+//default set of books for display in library
+const BOOKS = [
+    new Book("Moby Dick", "Herman Melville", 585),
+    new Book("The Lord of the Flies", "William Golding", 224),
+    new Book("The Catch in the Rye", "J.D. Salinger", 277),
+    new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
+    new Book("To Kill a Mockingbird", "Harper Lee", 281),
+    new Book("Pride and Prejudice", "Jane Austen", 328),
+]
+const myLibrary = BOOKS;
+displayLibrary();
