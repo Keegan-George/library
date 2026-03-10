@@ -13,7 +13,8 @@ const READ_BUTTON_DISABLED_TEXT = "unread";
 
 
 /**
- * Represents a Book object with title, author, pages, and read status.
+ * @class Book
+ * @classdesc Represents a Book object with title, author, pages, and read status.
  * 
  * @property {string} id - Unique identifier.
  * @property {string} title - Book title.
@@ -48,7 +49,8 @@ class Book {
 }
 
 /**
- * Represents a Library
+ * @class Library
+ * @classdesc Manages collection of books with add/remove/display operations.
  */
 class Library {
     books = [];
@@ -117,6 +119,12 @@ const library = new Library();
 //book container
 const bookContainer = document.querySelector(".book-container");
 
+
+/**
+ * @module LibraryDisplay
+ * 
+ * @description Handles all DOM display logic for the library app.
+ */
 const LibraryDisplay = (() => {
     /**
      * Initializes the library with a default set of books.
@@ -170,6 +178,7 @@ const LibraryDisplay = (() => {
      * Displays all books in the library to the DOM.
      * Clears the existing display and recreates each book card.
      *
+     * @private
      * @returns {void}
      */
     function displayLibrary() {
@@ -202,6 +211,7 @@ const LibraryDisplay = (() => {
     /**
      * Removes all books from the DOM.
      *
+     * @private
      * @returns {void}
      */
     function clearLibrary() {
@@ -241,6 +251,7 @@ const LibraryDisplay = (() => {
     /**
      * Escapes HTML special characters to prevent XSS injection.
      *
+     * @private
      * @param {string} str - The string to sanitize.
      * @returns {string} The sanitized string with HTML entities encoded.
      */
