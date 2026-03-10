@@ -74,7 +74,7 @@ class Library {
      * @param {number} pageCount - The number of pages in the book.
      * @returns {void}
      */
-    addBookToLibrary(title, author, pageCount) {
+    addBook(title, author, pageCount) {
         const book = new Book(title, author, pageCount);
         this.books.push(book);
     }
@@ -202,7 +202,7 @@ form.addEventListener("submit", (event) => {
 
     form.reset();
 
-    library.addBookToLibrary(title, author, pageCount);
+    library.addBook(title, author, pageCount);
 
     displayLibrary();
 });
