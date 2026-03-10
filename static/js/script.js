@@ -1,6 +1,9 @@
 //book container
 const bookContainer = document.querySelector(".book-container");
 
+//library
+let myLibrary;
+
 //DOM class constants
 const CLASS_CARD = "card";
 const CLASS_BUTTON = "btn";
@@ -174,14 +177,22 @@ function escapeHTML(str) {
     }[char]));
 }
 
-//default set of books for display in library
-const BOOKS = [
-    new Book("Moby Dick", "Herman Melville", 585),
-    new Book("The Lord of the Flies", "William Golding", 224),
-    new Book("The Catch in the Rye", "J.D. Salinger", 277),
-    new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
-    new Book("To Kill a Mockingbird", "Harper Lee", 281),
-    new Book("Pride and Prejudice", "Jane Austen", 328),
-]
-const myLibrary = BOOKS;
-displayLibrary();
+/**
+ * Initializes the library with a default set of books.
+ * Displays the library in the DOM.
+ * @returns {void} 
+ */
+function init() {
+    //default set of books for display in library
+    const BOOKS = [
+        new Book("Moby Dick", "Herman Melville", 585),
+        new Book("The Lord of the Flies", "William Golding", 224),
+        new Book("The Catch in the Rye", "J.D. Salinger", 277),
+        new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
+        new Book("To Kill a Mockingbird", "Harper Lee", 281),
+        new Book("Pride and Prejudice", "Jane Austen", 328),
+    ]
+    myLibrary = BOOKS;
+    displayLibrary();
+}
+init();
