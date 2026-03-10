@@ -45,11 +45,7 @@ bookContainer.addEventListener("click", (event) => {
 
 
 /**
- * Represents a book object
- *
- * @param {string} title - The title of the book.
- * @param {string} author - The author of the book.
- * @param {number} pageCount - The number of pages in the book.
+ * Represents a Book object
  */
 class Book {
     /**
