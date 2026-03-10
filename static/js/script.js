@@ -104,6 +104,9 @@ class Library {
      */
     removeBook(book) {
         const index = this.books.indexOf(book);
+
+        if (index === -1) { return; }
+
         this.books.splice(index, 1);
     }
 }
