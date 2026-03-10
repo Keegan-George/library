@@ -87,6 +87,16 @@ class Library {
     getBook(id) {
         return this.books.find(book => book.id === id);
     }
+
+    /**
+     * Removes the provided book from the library
+     * @param {Book} - The book to be remoed from the library
+     * @returns {void}
+     */
+    removeBook(book){
+        const index = this.books.indexOf(book);
+        this.books.splice(index, 1);
+    }
 }
 
 //library
@@ -118,8 +128,7 @@ bookContainer.addEventListener("click", (event) => {
     }
 
     else if (targetElement.classList.contains(CLASS_REMOVE_BUTTON)) {
-        const index = library.books.indexOf(book);
-        library.books.splice(index, 1);
+        library.removeBook(book);
         displayLibrary();
     }
 });
