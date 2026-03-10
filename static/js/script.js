@@ -13,12 +13,18 @@ const READ_BUTTON_DISABLED_TEXT = "unread";
 
 
 /**
- * Represents a Book object
+ * Represents a Book object with title, author, pages, and read status.
+ * 
+ * @property {string} id - Unique identifier.
+ * @property {string} title - Book title.
+ * @property {string} author - Book author.
+ * @property {number} pageCount - Number of pages.
+ * @property {boolean} read - Read status.
  */
 class Book {
     /**
      * Creates a new Book instance
-     *
+     * 
      * @param {string} title - The title of the book.
      * @param {string} author - The author of the book.
      * @param {number} pageCount - The number of pages in the book.
@@ -51,7 +57,7 @@ class Library {
     /**
      * Gets the list of books in the library.
      * 
-     * @returns {list} books - The list of books in the library
+     * @returns {Book[]} List of books in the library.
      */
     get books() {
         return this.books;
@@ -60,7 +66,7 @@ class Library {
     /**
      * Assign a list of books to the library. 
      *
-     * @param {list} book_arr - A list of book objects
+     * @param {Book[]} book_arr - Array of book objects.
      * @returns {void}
      */
     set books(book_arr) {
@@ -68,7 +74,7 @@ class Library {
     }
 
     /**
-     * Creates a new Book and adds it to the Library.
+     * Creates a new Book and adds it to the library.
      *
      * @param {string} title - The title of the book.
      * @param {string} author - The author of the book.
@@ -81,7 +87,8 @@ class Library {
     }
 
     /**
-     * Retrieves a book from the library based on its id
+     * Retrieves a book from the library by its id.
+     * 
      * @param {string} id - The id of the book
      * @returns {Book} - The book
      */
@@ -90,8 +97,9 @@ class Library {
     }
 
     /**
-     * Removes the provided book from the library
-     * @param {Book} - The book to be remoed from the library
+     * Removes the provided book from the library.
+     * 
+     * @param {Book} book - The book to remove.
      * @returns {void}
      */
     removeBook(book) {
