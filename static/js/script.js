@@ -1,7 +1,7 @@
 //book container
 const bookContainer = document.querySelector(".book-container");
 
-//class constants
+//DOM class constants
 const CLASS_CARD = "card";
 const CLASS_BUTTON = "btn";
 const CLASS_REMOVE_BUTTON = "remove-button";
