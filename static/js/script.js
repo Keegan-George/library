@@ -1,8 +1,6 @@
 //book container
 const bookContainer = document.querySelector(".book-container");
 
-//library
-let myLibrary;
 
 //DOM class constants
 const CLASS_CARD = "card";
@@ -31,7 +29,7 @@ bookContainer.addEventListener("click", (event) => {
     if (!card) return;
 
     const cardId = card.getAttribute("data-id");
-    const book = myLibrary.find(book => book.id === cardId)
+    const book = library.books.find(book => book.id === cardId)
 
     if (targetElement.classList.contains(CLASS_READ_BUTTON)) {
         book.toggleReadStatus();
@@ -40,8 +38,8 @@ bookContainer.addEventListener("click", (event) => {
     }
 
     else if (targetElement.classList.contains(CLASS_REMOVE_BUTTON)) {
-        const index = myLibrary.indexOf(book);
-        myLibrary.splice(index, 1);
+        const index = library.books.indexOf(book);
+        library.books.splice(index, 1);
         displayLibrary();
     }
 });
@@ -76,19 +74,48 @@ class Book {
     }
 }
 
-
 /**
- * Creates a new Book object and adds it to the library.
- *
- * @param {string} title - The title of the book.
- * @param {string} author - The author of the book.
- * @param {number} pageCount - The number of pages in the book.
- * @returns {void}
+ * Represents a Library
  */
-function addBookToLibrary(title, author, pageCount) {
-    const book = new Book(title, author, pageCount);
-    myLibrary.push(book);
+class Library {
+    books = [];
+    constructor() { }
+
+    /**
+     * Creates a new Book and adds it to the Library.
+     *
+     * @param {string} title - The title of the book.
+     * @param {string} author - The author of the book.
+     * @param {number} pageCount - The number of pages in the book.
+     * @returns {void}
+     */
+    addBookToLibrary(title, author, pageCount) {
+        const book = new Book(title, author, pageCount);
+        this.books.push(book);
+    }
+
+    /**
+     * Gets the list of books in the library.
+     * @returns {list} book - The list of books in the library
+     */
+    get books() {
+        return this.books;
+    };
+
+    /**
+     * Set the library to the of list of books provided. 
+     *
+     * @param {list} book_arr - A list of book objects
+     * @returns {void}
+     */
+    set books(book_arr) {
+        this.books = book_arr;
+    }
 }
+
+//library
+const library = new Library();
+
 
 /**
  * Displays all books in the library to the DOM.
@@ -99,7 +126,7 @@ function addBookToLibrary(title, author, pageCount) {
 function displayLibrary() {
     clearLibrary();
 
-    for (let book of myLibrary) {
+    for (let book of library.books) {
         let card = document.createElement("div");
         card.classList.add(CLASS_CARD);
         card.setAttribute("data-id", book.id);
@@ -132,8 +159,10 @@ function clearLibrary() {
     bookContainer.innerHTML = "";
 }
 
+
 const addButton = document.querySelector(".add-button");
 const form = document.querySelector(".book-form");
+
 
 addButton.addEventListener("click", () => {
     form.classList.toggle(CLASS_VISIBLE);
@@ -156,7 +185,7 @@ form.addEventListener("submit", (event) => {
 
     form.reset();
 
-    addBookToLibrary(title, author, pageCount);
+    library.addBookToLibrary(title, author, pageCount);
 
     displayLibrary();
 });
@@ -192,7 +221,7 @@ function init() {
         new Book("To Kill a Mockingbird", "Harper Lee", 281),
         new Book("Pride and Prejudice", "Jane Austen", 328),
     ]
-    myLibrary = BOOKS;
+    library.books = BOOKS;
     displayLibrary();
 }
 init();
