@@ -1,7 +1,3 @@
-//book container
-const bookContainer = document.querySelector(".book-container");
-
-
 //DOM class constants
 const CLASS_CARD = "card";
 const CLASS_BUTTON = "btn";
@@ -14,35 +10,6 @@ const CLASS_VISIBLE = "visible";
 const REMOVE_BUTTON_TEXT = "remove";
 const READ_BUTTON_ENABLED_TEXT = "read";
 const READ_BUTTON_DISABLED_TEXT = "unread";
-
-/**
- * Handles click events inside the book container.
- * Detects whether the user clicked a read-toggle button or a remove button,
- * updates the corresponding book, and refreshes the display if needed.
- *
- * @param {MouseEvent} event - The click event.
- * @returns {void}
- */
-bookContainer.addEventListener("click", (event) => {
-    const targetElement = event.target;
-    const card = targetElement.closest(`.${CLASS_CARD}`);
-    if (!card) return;
-
-    const cardId = card.getAttribute("data-id");
-    const book = library.books.find(book => book.id === cardId)
-
-    if (targetElement.classList.contains(CLASS_READ_BUTTON)) {
-        book.toggleReadStatus();
-        targetElement.textContent = book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT;
-        targetElement.classList.toggle(CLASS_READ);
-    }
-
-    else if (targetElement.classList.contains(CLASS_REMOVE_BUTTON)) {
-        const index = library.books.indexOf(book);
-        library.books.splice(index, 1);
-        displayLibrary();
-    }
-});
 
 
 /**
@@ -82,6 +49,24 @@ class Library {
     constructor() { }
 
     /**
+     * Gets the list of books in the library.
+     * @returns {list} books - The list of books in the library
+     */
+    get books() {
+        return this.books;
+    };
+
+    /**
+     * Assign a list of books to the library. 
+     *
+     * @param {list} book_arr - A list of book objects
+     * @returns {void}
+     */
+    set books(book_arr) {
+        this.books = book_arr;
+    }
+
+    /**
      * Creates a new Book and adds it to the Library.
      *
      * @param {string} title - The title of the book.
@@ -93,28 +78,51 @@ class Library {
         const book = new Book(title, author, pageCount);
         this.books.push(book);
     }
-
+    
     /**
-     * Gets the list of books in the library.
-     * @returns {list} book - The list of books in the library
+     * Retrieves a book from the library based on its id
+     * @param {string} id - The id of the book
+     * @returns {Book} - The book
      */
-    get books() {
-        return this.books;
-    };
-
-    /**
-     * Set the library to the of list of books provided. 
-     *
-     * @param {list} book_arr - A list of book objects
-     * @returns {void}
-     */
-    set books(book_arr) {
-        this.books = book_arr;
+    getBook(id) {
+        return this.books.find(book => book.id === id);
     }
 }
 
 //library
 const library = new Library();
+
+//book container
+const bookContainer = document.querySelector(".book-container");
+
+/**
+ * Handles click events inside the book container.
+ * Detects whether the user clicked a read-toggle button or a remove button,
+ * updates the corresponding book, and refreshes the display if needed.
+ *
+ * @param {MouseEvent} event - The click event.
+ * @returns {void}
+ */
+bookContainer.addEventListener("click", (event) => {
+    const targetElement = event.target;
+    const card = targetElement.closest(`.${CLASS_CARD}`);
+    if (!card) return;
+
+    const cardId = card.getAttribute("data-id");
+    const book = library.getBook(cardId);
+
+    if (targetElement.classList.contains(CLASS_READ_BUTTON)) {
+        book.toggleReadStatus();
+        targetElement.textContent = book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT;
+        targetElement.classList.toggle(CLASS_READ);
+    }
+
+    else if (targetElement.classList.contains(CLASS_REMOVE_BUTTON)) {
+        const index = library.books.indexOf(book);
+        library.books.splice(index, 1);
+        displayLibrary();
+    }
+});
 
 
 /**
