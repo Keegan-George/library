@@ -50,6 +50,7 @@ class Library {
 
     /**
      * Gets the list of books in the library.
+     * 
      * @returns {list} books - The list of books in the library
      */
     get books() {
@@ -78,7 +79,7 @@ class Library {
         const book = new Book(title, author, pageCount);
         this.books.push(book);
     }
-    
+
     /**
      * Retrieves a book from the library based on its id
      * @param {string} id - The id of the book
@@ -93,7 +94,7 @@ class Library {
      * @param {Book} - The book to be remoed from the library
      * @returns {void}
      */
-    removeBook(book){
+    removeBook(book) {
         const index = this.books.indexOf(book);
         this.books.splice(index, 1);
     }
@@ -105,50 +106,70 @@ const library = new Library();
 //book container
 const bookContainer = document.querySelector(".book-container");
 
-/**
- * Handles click events inside the book container.
- * Detects whether the user clicked a read-toggle button or a remove button,
- * updates the corresponding book, and refreshes the display if needed.
- *
- * @param {MouseEvent} event - The click event.
- * @returns {void}
- */
-bookContainer.addEventListener("click", (event) => {
-    const targetElement = event.target;
-    const card = targetElement.closest(`.${CLASS_CARD}`);
-    if (!card) return;
-
-    const cardId = card.getAttribute("data-id");
-    const book = library.getBook(cardId);
-
-    if (targetElement.classList.contains(CLASS_READ_BUTTON)) {
-        book.toggleReadStatus();
-        targetElement.textContent = book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT;
-        targetElement.classList.toggle(CLASS_READ);
-    }
-
-    else if (targetElement.classList.contains(CLASS_REMOVE_BUTTON)) {
-        library.removeBook(book);
+const LibraryDisplay = (() => {
+    /**
+     * Initializes the library with a default set of books.
+     * Displays the library in the DOM.
+     * @returns {void} 
+     */
+    function init() {
+        //default set of books for display in library
+        const BOOKS = [
+            new Book("Moby Dick", "Herman Melville", 585),
+            new Book("The Lord of the Flies", "William Golding", 224),
+            new Book("The Catch in the Rye", "J.D. Salinger", 277),
+            new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
+            new Book("To Kill a Mockingbird", "Harper Lee", 281),
+            new Book("Pride and Prejudice", "Jane Austen", 328),
+        ]
+        library.books = BOOKS;
         displayLibrary();
     }
-});
+    init();
 
+    /**
+     * Handles click events inside the book container.
+     * Detects whether the user clicked a read-toggle button or a remove button,
+     * updates the corresponding book, and refreshes the display if needed.
+     *
+     * @param {MouseEvent} event - The click event.
+     * @returns {void}
+     */
+    bookContainer.addEventListener("click", (event) => {
+        const targetElement = event.target;
+        const card = targetElement.closest(`.${CLASS_CARD}`);
+        if (!card) return;
 
-/**
- * Displays all books in the library to the DOM.
- * Clears the existing display and recreates each book card.
- *
- * @returns {void}
- */
-function displayLibrary() {
-    clearLibrary();
+        const cardId = card.getAttribute("data-id");
+        const book = library.getBook(cardId);
 
-    for (let book of library.books) {
-        let card = document.createElement("div");
-        card.classList.add(CLASS_CARD);
-        card.setAttribute("data-id", book.id);
+        if (targetElement.classList.contains(CLASS_READ_BUTTON)) {
+            book.toggleReadStatus();
+            targetElement.textContent = book.read ? READ_BUTTON_ENABLED_TEXT : READ_BUTTON_DISABLED_TEXT;
+            targetElement.classList.toggle(CLASS_READ);
+        }
 
-        card.innerHTML = `
+        else if (targetElement.classList.contains(CLASS_REMOVE_BUTTON)) {
+            library.removeBook(book);
+            displayLibrary();
+        }
+    });
+
+    /**
+     * Displays all books in the library to the DOM.
+     * Clears the existing display and recreates each book card.
+     *
+     * @returns {void}
+     */
+    function displayLibrary() {
+        clearLibrary();
+
+        for (let book of library.books) {
+            let card = document.createElement("div");
+            card.classList.add(CLASS_CARD);
+            card.setAttribute("data-id", book.id);
+
+            card.innerHTML = `
             <div class="book-info">
                 <h3 class="title">${escapeHTML(book.title)}</h3>
                 <p class="author">${escapeHTML(book.author)}</p>
@@ -163,82 +184,62 @@ function displayLibrary() {
             </div>
         `;
 
-        bookContainer.appendChild(card);
+            bookContainer.appendChild(card);
+        }
     }
-}
 
-/**
- * Removes all book from the DOM.
- *
- * @returns {void}
- */
-function clearLibrary() {
-    bookContainer.innerHTML = "";
-}
+    /**
+     * Removes all books from the DOM.
+     *
+     * @returns {void}
+     */
+    function clearLibrary() {
+        bookContainer.innerHTML = "";
+    }
+
+    const addButton = document.querySelector(".add-button");
+    const form = document.querySelector(".book-form");
+
+    addButton.addEventListener("click", () => {
+        form.classList.toggle(CLASS_VISIBLE);
+    });
+
+    /**
+     * Handles the book form submission.
+     * Prevents page reload on form submission, extracts form values, 
+     * adds a new book, resets the form, and updates the displayed library.
+     *
+     * @param {SubmitEvent} event - The form submission event.
+     * @returns {void}
+     */
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const title = document.querySelector("#title").value;
+        const author = document.querySelector("#author").value;
+        const pageCount = Number(document.querySelector("#page-count").value);
+
+        form.reset();
+
+        library.addBook(title, author, pageCount);
+
+        displayLibrary();
+    });
 
 
-const addButton = document.querySelector(".add-button");
-const form = document.querySelector(".book-form");
-
-
-addButton.addEventListener("click", () => {
-    form.classList.toggle(CLASS_VISIBLE);
-});
-
-/**
- * Handles the book form submission.
- * Prevents page reload on form submission, extracts form values, 
- * adds a new book, resets the form, and updates the displayed library.
- *
- * @param {SubmitEvent} event - The form submission event.
- * @returns {void}
- */
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const title = document.querySelector("#title").value;
-    const author = document.querySelector("#author").value;
-    const pageCount = Number(document.querySelector("#page-count").value);
-
-    form.reset();
-
-    library.addBook(title, author, pageCount);
-
-    displayLibrary();
-});
-
-/**
- * Escapes HTML special characters to prevent XSS injection.
- *
- * @param {string} str - The string to sanitize.
- * @returns {string} The sanitized string with HTML entities encoded.
- */
-function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-    }[char]));
-}
-
-/**
- * Initializes the library with a default set of books.
- * Displays the library in the DOM.
- * @returns {void} 
- */
-function init() {
-    //default set of books for display in library
-    const BOOKS = [
-        new Book("Moby Dick", "Herman Melville", 585),
-        new Book("The Lord of the Flies", "William Golding", 224),
-        new Book("The Catch in the Rye", "J.D. Salinger", 277),
-        new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
-        new Book("To Kill a Mockingbird", "Harper Lee", 281),
-        new Book("Pride and Prejudice", "Jane Austen", 328),
-    ]
-    library.books = BOOKS;
-    displayLibrary();
-}
-init();
+    /**
+     * Escapes HTML special characters to prevent XSS injection.
+     *
+     * @param {string} str - The string to sanitize.
+     * @returns {string} The sanitized string with HTML entities encoded.
+     */
+    function escapeHTML(str) {
+        return str.replace(/[&<>"']/g, char => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[char]));
+    }
+})();
