@@ -245,9 +245,9 @@ const LibraryDisplay = (() => {
     const author = authorInput.value;
     const pageCount = Number(pageCountInput.value);
 
-    if (!validateForm()){
-        return;
-    };
+    if (!validateForm()) {
+      return;
+    }
 
     form.reset();
 
@@ -278,28 +278,22 @@ const LibraryDisplay = (() => {
   }
 
   function validateForm() {
-    if (titleInput.validity.valueMissing) {
-      titleInput.setCustomValidity("The title must be filled!");
-      titleInput.reportValidity();
-      return false;
-    } else {
-      titleInput.setCustomValidity("");
-    }
+    const formInputs = [
+      { input: titleInput, message: "The title must be filled!" },
+      { input: authorInput, message: "The author name must be filled!" },
+      { input: pageCountInput, message: "Page count must be greater than 0!" },
+    ];
 
-    if (authorInput.validity.valueMissing) {
-      authorInput.setCustomValidity("The author name must be filled!");
-      authorInput.reportValidity();
-      return false;
-    }
-    else{
-        authorInput.setCustomValidity("");
-    }
-    if (pageCountInput.validity.valueMissing) {
-      pageCountInput.setCustomValidity("Page count must be greater than 0!");
-      pageCountInput.reportValidity();
-      return false;
-    } else {
-      pageCountInput.setCustomValidity("");
+    for (const formInput of formInputs) {
+      const { input, message } = formInput;
+
+      input.setCustomValidity("");
+
+      if (!input.checkValidity()) {
+        input.setCustomValidity(message);
+        input.reportValidity();
+        return false;
+      }
     }
 
     return true;
