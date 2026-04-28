@@ -13,16 +13,14 @@ const REMOVE_BUTTON_TEXT = "remove";
 const READ_BUTTON_ENABLED_TEXT = "read";
 const READ_BUTTON_DISABLED_TEXT = "unread";
 
-//input fields
+//DOM elements
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
 const pageCountInput = document.querySelector("#page-count");
+const bookContainer = document.querySelector(".book-container");
 
 //library
 const library = new Library();
-
-//book container
-const bookContainer = document.querySelector(".book-container");
 
 /**
  * @module LibraryDisplay
@@ -30,25 +28,8 @@ const bookContainer = document.querySelector(".book-container");
  * @description Handles all DOM display logic for the library app.
  */
 const LibraryDisplay = (() => {
-  /**
-   * Initializes the library with a default set of books.
-   * Displays the library in the DOM.
-   * @returns {void}
-   */
-  function init() {
-    //default set of books for display in library
-    const BOOKS = [
-      new Book("Moby Dick", "Herman Melville", 585),
-      new Book("The Lord of the Flies", "William Golding", 224),
-      new Book("The Catcher in the Rye", "J.D. Salinger", 277),
-      new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
-      new Book("To Kill a Mockingbird", "Harper Lee", 281),
-      new Book("Pride and Prejudice", "Jane Austen", 328),
-    ];
-    library.books = BOOKS;
-    displayLibrary();
-  }
-  init();
+  library.init();
+  displayLibrary();
 
   /**
    * Handles click events inside the book container.

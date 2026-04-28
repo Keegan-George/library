@@ -5,8 +5,27 @@ import { Book } from "./book.js";
  * @classdesc Manages collection of books with add/remove/display operations.
  */
 class Library {
-  books = [];
-  constructor() {}
+  constructor() {
+    this._books = [];
+  }
+
+  /**
+   * Initializes the library with a default set of books.
+   * @returns {void}
+   */
+  init() {
+    //initial set of books for display in the library.
+    const BOOKS = [
+      new Book("Moby Dick", "Herman Melville", 585),
+      new Book("The Lord of the Flies", "William Golding", 224),
+      new Book("The Catcher in the Rye", "J.D. Salinger", 277),
+      new Book("The Great Gatsby", "F.Scott Fitzgerald", 180),
+      new Book("To Kill a Mockingbird", "Harper Lee", 281),
+      new Book("Pride and Prejudice", "Jane Austen", 328),
+    ];
+
+    this._books = BOOKS;
+  }
 
   /**
    * Gets the list of books in the library.
@@ -14,7 +33,7 @@ class Library {
    * @returns {Book[]} List of books in the library.
    */
   get books() {
-    return this.books;
+    return this._books;
   }
 
   /**
@@ -24,7 +43,7 @@ class Library {
    * @returns {void}
    */
   set books(book_arr) {
-    this.books = book_arr;
+    this._books = book_arr;
   }
 
   /**
@@ -37,7 +56,7 @@ class Library {
    */
   addBook(title, author, pageCount) {
     const book = new Book(title, author, pageCount);
-    this.books.push(book);
+    this._books.push(book);
   }
 
   /**
@@ -47,7 +66,7 @@ class Library {
    * @returns {?Book} - The book, or null if not found
    */
   getBook(id) {
-    return this.books.find((book) => book.id === id);
+    return this._books.find((book) => book.id === id);
   }
 
   /**
@@ -57,13 +76,13 @@ class Library {
    * @returns {void}
    */
   removeBook(book) {
-    const index = this.books.indexOf(book);
+    const index = this._books.indexOf(book);
 
     if (index === -1) {
       return;
     }
 
-    this.books.splice(index, 1);
+    this._books.splice(index, 1);
   }
 }
 
