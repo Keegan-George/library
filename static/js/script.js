@@ -32,6 +32,16 @@ const LibraryDisplay = (() => {
   displayLibrary();
 
   /**
+   * Clears custom validation messages when the user begins typing.
+   *
+   * @private
+   * @returns {void}
+   */
+  [titleInput, authorInput, pageCountInput].forEach((input) => {
+    input.addEventListener("input", () => input.setCustomValidity(""));
+  });
+
+  /**
    * Handles click events inside the book container.
    * Detects whether the user clicked a read-toggle button or a remove button,
    * updates the corresponding book, and refreshes the display if needed.
@@ -157,6 +167,13 @@ const LibraryDisplay = (() => {
     );
   }
 
+  /**
+   * Validates the add‑book form.
+   * Applies custom error messages and reports the first invalid field.
+   *
+   * @private
+   * @returns {boolean} True if the form is valid, false otherwise.
+   */
   function validateForm() {
     const formInputs = [
       { input: titleInput, message: "The title must be filled!" },
